@@ -2,10 +2,17 @@
   "name": "nx-cypress-test-repo",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "private": true,
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@commitlint/config-nx-scopes": "^17.2.0",
+    "@commitlint/cz-commitlint": "^17.3.0",
+    "@ensono-stacks/workspace": "^0.6.2",
     "@nrwl/cypress": "15.2.1",
     "@nrwl/eslint-plugin-nx": "15.9.4",
     "@nrwl/jest": "15.2.1",
@@ -22,17 +29,26 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
+    "commitizen": "^4.2.5",
     "cypress": "^11.0.0",
     "eslint": "~8.15.0",
+    "eslint-config-airbnb": "19.0.4",
     "eslint-config-next": "13.1.1",
-    "eslint-config-prettier": "8.1.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "3.5.2",
+    "eslint-plugin-compat": "4.0.2",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-security": "1.4.0",
+    "eslint-plugin-unicorn": "37.0.1",
+    "husky": "^8.0.2",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
+    "lint-staged": "13.1.2",
     "nx": "15.9.4",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
@@ -48,5 +64,10 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tslib": "^2.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
