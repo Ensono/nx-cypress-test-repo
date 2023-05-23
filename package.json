@@ -12,7 +12,6 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@commitlint/config-nx-scopes": "^17.2.0",
     "@commitlint/cz-commitlint": "^17.3.0",
-    "@ensono-stacks/cypress": "file:C:\\Users\\dphillips\\Documents\\code\\stacks-nx-plugins\\dist\\packages\\cypress\\ensono-stacks-cypress-0.0.0.tgz",
     "@ensono-stacks/next": "^1.7.2",
     "@ensono-stacks/playwright": "^0.4.2",
     "@ensono-stacks/workspace": "^0.6.2",

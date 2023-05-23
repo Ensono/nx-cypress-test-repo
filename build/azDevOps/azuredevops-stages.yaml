@@ -46,7 +46,6 @@ stages:
               npm ci
               git config --global user.email "pipelines@test.dev"
               git config --global user.name "Amido Pipelines"
-              npx playwright install --with-deps
           - task: AzureCLI@2
             displayName: build_deployment_${{ parameters.environment }}
             env:
