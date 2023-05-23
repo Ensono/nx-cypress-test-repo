@@ -98,7 +98,7 @@
       },
       "configurations": {
         "ci": {
-          "cwd": "apps/next-application-for-cypress/../../test-results/next-app-e2e/downloads"
+          "cwd": "apps/next-application-for-cypress/../../test-results/next-application-for-cypress/downloads"
         }
       }
     },

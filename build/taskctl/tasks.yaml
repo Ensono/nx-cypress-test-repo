@@ -83,3 +83,7 @@ tasks:
     description: Run e2e tests in ci
     command:
       - npx nx affected --base="$BASE_SHA" --target=e2e --parallel=1
+  html:
+    description: Generate html reports for tests
+    command:
+      - npx nx affected --base="$BASE_SHA" --target=html-report --parallel=1
