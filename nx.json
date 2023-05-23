@@ -70,7 +70,9 @@
       }
     },
     "executedGenerators": {
-      "project": {},
+      "project": {
+        "next-application-for-cypress": ["CypressInit"]
+      },
       "workspace": ["WorkspaceInit", "WorkspaceDeployment"]
     }
   },

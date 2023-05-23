@@ -1,5 +1,6 @@
 {
   "extends": [
+    "plugin:cypress/recommended",
     "plugin:@nrwl/nx/react-typescript",
     "next",
     "next/core-web-vitals",
@@ -12,7 +13,7 @@
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/next-application-for-e2e/pages"
+          "apps/next-application-for-cypress/pages"
         ]
       }
     },
@@ -22,6 +23,10 @@
     },
     {
       "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.cy.{ts,js,tsx,jsx}", "cypress/**/*.{ts,js,tsx,jsx}"],
       "rules": {}
     }
   ],
