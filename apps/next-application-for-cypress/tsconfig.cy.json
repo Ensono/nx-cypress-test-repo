@@ -5,7 +5,8 @@
     "outDir": "../../dist/out-tsc",
     "allowJs": true,
     "types": ["cypress", "node"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": false,
   },
   "include": ["cypress/**/*.ts", "cypress/**/*.js", "cypress.config.ts"]
 }
