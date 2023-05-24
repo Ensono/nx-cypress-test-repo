@@ -8,6 +8,8 @@ pipelines:
       depends_on: lint
     - task: e2e:ci
       depends_on: build
+    - task: html
+      depends_on: e2e:ci
     - task: version
       depends_on: e2e:ci
     - task: terraform
@@ -20,6 +22,8 @@ pipelines:
       depends_on: lint
     - task: e2e:ci
       depends_on: build
+    - task: html
+      depends_on: e2e:ci
     - task: version
       depends_on: e2e:ci
   nonprod:
@@ -30,6 +34,8 @@ pipelines:
       depends_on: build:ci
     - task: e2e:ci
       depends_on: test:ci
+    - task: html
+      depends_on: e2e:ci
     - task: version:nonprod
       depends_on: e2e:ci
     - task: terraform:nonprod
@@ -42,6 +48,8 @@ pipelines:
       depends_on: build:ci
     - task: e2e:ci
       depends_on: test:ci
+    - task: html
+      depends_on: e2e:ci
     - task: version:prod
       depends_on: e2e:ci
     - task: terraform:prod

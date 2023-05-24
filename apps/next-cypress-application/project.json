@@ -1,7 +1,7 @@
 {
-  "name": "next-application-for-cypress",
+  "name": "next-cypress-application",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/next-application-for-cypress",
+  "sourceRoot": "apps/next-cypress-application",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,8 +9,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/next-application-for-cypress",
-        "outputPath": "dist/apps/next-application-for-cypress"
+        "root": "apps/next-cypress-application",
+        "outputPath": "dist/apps/next-cypress-application"
       },
       "configurations": {
         "development": {},
@@ -21,16 +21,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "next-application-for-cypress:build",
+        "buildTarget": "next-cypress-application:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "next-application-for-cypress:build:development",
+          "buildTarget": "next-cypress-application:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "next-application-for-cypress:build:production",
+          "buildTarget": "next-cypress-application:build:production",
           "dev": false
         }
       }
@@ -38,14 +38,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "next-application-for-cypress:build:production"
+        "buildTarget": "next-cypress-application:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/next-application-for-cypress/jest.config.ts",
+        "jestConfig": "apps/next-cypress-application/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -69,20 +69,20 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/next-application-for-cypress/**/*.{ts,tsx,js,jsx}"
+          "apps/next-cypress-application/**/*.{ts,tsx,js,jsx}"
         ]
       }
     },
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/next-application-for-cypress/cypress.config.ts",
+        "cypressConfig": "apps/next-cypress-application/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "next-application-for-cypress:serve"
+        "devServerTarget": "next-cypress-application:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "next-application-for-cypress:serve:production"
+          "devServerTarget": "next-cypress-application:serve:production"
         }
       }
     },
@@ -94,11 +94,11 @@
           "marge merged-html-report.json --reportDir ./ --inline"
         ],
         "parallel": false,
-        "cwd": "apps/next-application-for-cypress/cypress/test-results/downloads"
+        "cwd": "apps/next-cypress-application/cypress/test-results/downloads"
       },
       "configurations": {
         "ci": {
-          "cwd": "apps/next-application-for-cypress/../../test-results/next-app-e2e/downloads"
+          "cwd": "apps/next-cypress-application/../../test-results/next-cypress-application/downloads"
         }
       }
     },
@@ -110,7 +110,7 @@
         "no-cache": true,
         "platforms": ["linux/amd64"],
         "metadata": {
-          "images": ["core/next-application-for-cypress"],
+          "images": ["core/next-cypress-application"],
           "tags": []
         }
       },
@@ -120,13 +120,13 @@
           "push": true,
           "metadata": {
             "tags": [
-              "amidostacksnonprodeuwcore.azurecr.io/core/next-application-for-cypress:latest",
-              "amidostacksnonprodeuwcore.azurecr.io/core/next-application-for-cypress:${version}"
+              "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+              "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
             ]
           },
           "tags": [
-            "amidostacksnonprodeuwcore.azurecr.io/core/next-application-for-cypress:latest",
-            "amidostacksnonprodeuwcore.azurecr.io/core/next-application-for-cypress:${version}"
+            "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+            "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
           ]
         },
         "prod": {
@@ -134,13 +134,13 @@
           "push": true,
           "metadata": {
             "tags": [
-              "amidostacksprodeuwcore.azurecr.io/core/next-application-for-cypress:latest",
-              "amidostacksprodeuwcore.azurecr.io/core/next-application-for-cypress:${version}"
+              "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+              "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
             ]
           },
           "tags": [
-            "amidostacksprodeuwcore.azurecr.io/core/next-application-for-cypress:latest",
-            "amidostacksprodeuwcore.azurecr.io/core/next-application-for-cypress:${version}"
+            "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+            "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
           ]
         }
       }
@@ -164,9 +164,9 @@
           "preid": "nonprod",
           "releaseAs": "prerelease",
           "postTargets": [
-            "next-application-for-cypress:version-env-var",
-            "next-application-for-cypress:container:nonprod",
-            "next-application-for-cypress:github"
+            "next-cypress-application:version-env-var",
+            "next-cypress-application:container:nonprod",
+            "next-cypress-application:github"
           ]
         },
         "prod": {
@@ -174,9 +174,9 @@
           "noVerify": true,
           "push": true,
           "postTargets": [
-            "next-application-for-cypress:version-env-var",
-            "next-application-for-cypress:container:prod",
-            "next-application-for-cypress:github"
+            "next-cypress-application:version-env-var",
+            "next-cypress-application:container:prod",
+            "next-cypress-application:github"
           ]
         }
       }
@@ -190,7 +190,7 @@
             "forwardAllArgs": false
           }
         ],
-        "cwd": "apps/next-application-for-cypress"
+        "cwd": "apps/next-cypress-application"
       }
     },
     "helm-upgrade": {
@@ -198,16 +198,16 @@
       "options": {
         "commands": [
           {
-            "command": "helm upgrade {args.helm-args} --create-namespace --install {args.values-files} next-application-for-cypress {args.chart} -n core --atomic --wait --kube-context {args.kube-context} --set image.tag=\"$APPLICATION_VERSION\" --set serviceAccount.annotations.\"azure\\.workload\\.identity/client-id\"=\"{args.clientid}\" --set serviceAccount.annotations.\"azure\\.workload\\.identity/tenant-id\"=\"{args.tenantid}\"",
+            "command": "helm upgrade {args.helm-args} --create-namespace --install {args.values-files} next-cypress-application {args.chart} -n core --atomic --wait --kube-context {args.kube-context} --set image.tag=\"$APPLICATION_VERSION\" --set serviceAccount.annotations.\"azure\\.workload\\.identity/client-id\"=\"{args.clientid}\" --set serviceAccount.annotations.\"azure\\.workload\\.identity/tenant-id\"=\"{args.tenantid}\"",
             "forwardAllArgs": false
           }
         ],
-        "cwd": "apps/next-application-for-cypress/deploy/helm/nonprod",
+        "cwd": "apps/next-cypress-application/deploy/helm/nonprod",
         "args": "--helm-args=--devel --chart=oci://amidostacksnonprodeuwcore.azurecr.io/helm/next-helm-chart --kube-context=amido-stacks-nonprod-euw-core-admin --values-files='--values values.yaml'"
       },
       "configurations": {
         "prod": {
-          "cwd": "apps/next-application-for-cypress/deploy/helm/prod",
+          "cwd": "apps/next-cypress-application/deploy/helm/prod",
           "args": "--helm-args='' --chart=oci://amidostacksprodeuwcore.azurecr.io/helm/next-helm-chart --kube-context=amido-stacks-prod-euw-core-admin --values-files='--values values.yaml'"
         }
       }
@@ -228,7 +228,7 @@
             "forwardAllArgs": false
           }
         ],
-        "cwd": "apps/next-application-for-cypress/deploy/terraform",
+        "cwd": "apps/next-cypress-application/deploy/terraform",
         "parallel": false
       }
     },
@@ -241,13 +241,13 @@
             "forwardAllArgs": false
           }
         ],
-        "args": "--rg=Stacks-Ancillary-Resources --sa=amidostackstfstate --container=tfstate --key=next-application-for-cypress:nonprod",
-        "cwd": "apps/next-application-for-cypress/deploy/terraform",
+        "args": "--rg=Stacks-Ancillary-Resources --sa=amidostackstfstate --container=tfstate --key=next-cypress-application:nonprod",
+        "cwd": "apps/next-cypress-application/deploy/terraform",
         "parallel": false
       },
       "configurations": {
         "prod": {
-          "args": "--rg=Stacks-Ancillary-Resources --sa=amidostackstfstate --container=tfstate --key=next-application-for-cypress:prod"
+          "args": "--rg=Stacks-Ancillary-Resources --sa=amidostackstfstate --container=tfstate --key=next-cypress-application:prod"
         }
       }
     },
@@ -260,7 +260,7 @@
             "forwardAllArgs": false
           }
         ],
-        "cwd": "apps/next-application-for-cypress/deploy/terraform",
+        "cwd": "apps/next-cypress-application/deploy/terraform",
         "parallel": false
       }
     },
@@ -273,12 +273,12 @@
             "forwardAllArgs": false
           },
           {
-            "command": "terraform plan -input=false -lock-timeout=60s {args.terraform} -out=next-application-for-cypress.tfplan",
+            "command": "terraform plan -input=false -lock-timeout=60s {args.terraform} -out=next-cypress-application.tfplan",
             "forwardAllArgs": false
           }
         ],
         "args": "--terraform='-var-file=variables/nonprod/dns.tfvars'",
-        "cwd": "apps/next-application-for-cypress/deploy/terraform",
+        "cwd": "apps/next-cypress-application/deploy/terraform",
         "parallel": false
       },
       "configurations": {
@@ -292,11 +292,11 @@
       "options": {
         "commands": [
           {
-            "command": "terraform apply -auto-approve -input=false next-application-for-cypress.tfplan",
+            "command": "terraform apply -auto-approve -input=false next-cypress-application.tfplan",
             "forwardAllArgs": false
           }
         ],
-        "cwd": "apps/next-application-for-cypress/deploy/terraform"
+        "cwd": "apps/next-cypress-application/deploy/terraform"
       },
       "configurations": {
         "prod": {}

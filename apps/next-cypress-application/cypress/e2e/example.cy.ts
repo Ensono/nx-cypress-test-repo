@@ -16,3 +16,5 @@ describe('Cypress example tests @example-cypress', () => {
     cy.get('#learning-materials').find('a').should('have.length', 5);
   });
 });
+
+export {};

@@ -13,7 +13,6 @@
     "@commitlint/config-nx-scopes": "^17.2.0",
     "@commitlint/cz-commitlint": "^17.3.0",
     "@ensono-stacks/next": "^1.7.2",
-    "@ensono-stacks/playwright": "^0.4.2",
     "@ensono-stacks/workspace": "^0.6.2",
     "@jscutlery/semver": "2.29.0",
     "@nrwl/cypress": "15.9.4",
