@@ -73,7 +73,11 @@
       "project": {
         "next-cypress-application": ["CypressInit"]
       },
-      "workspace": ["WorkspaceInit", "WorkspaceDeployment"]
+      "workspace": [
+        "WorkspaceInit",
+        "WorkspaceDeployment",
+        "CypressInitDeployment"
+      ]
     }
   },
   "extends": "nx/presets/npm.json"
