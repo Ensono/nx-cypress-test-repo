@@ -12,8 +12,9 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@commitlint/config-nx-scopes": "^17.2.0",
     "@commitlint/cz-commitlint": "^17.3.0",
+    "@ensono-stacks/cypress": "file://C:\\Users\\dphillips\\Documents\\code\\stacks-nx-plugins\\dist\\packages\\cypress\\ensono-stacks-cypress-0.0.1.tgz",
     "@ensono-stacks/workspace": "^0.6.2",
-    "@nrwl/cypress": "15.2.1",
+    "@nrwl/cypress": "15.9.4",
     "@nrwl/eslint-plugin-nx": "15.9.4",
     "@nrwl/jest": "15.2.1",
     "@nrwl/js": "15.9.4",
@@ -30,7 +31,8 @@
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
     "commitizen": "^4.2.5",
-    "cypress": "^11.0.0",
+    "cypress": "^12.12.0",
+    "cypress-multi-reporters": "^1.6.3",
     "eslint": "~8.15.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-next": "13.1.1",
@@ -49,13 +51,15 @@
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "lint-staged": "13.1.2",
+    "mocha-junit-reporter": "2.2.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
     "nx": "15.9.4",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
-    "typescript": "~4.9.5",
-    "@ensono-stacks/cypress": "file://C:\\Users\\dphillips\\Documents\\code\\stacks-nx-plugins\\dist\\packages\\cypress\\ensono-stacks-cypress-0.0.1.tgz"
+    "typescript": "~4.9.5"
   },
   "workspaces": [
     "packages/*"
