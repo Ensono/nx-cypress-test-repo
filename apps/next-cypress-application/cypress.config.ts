@@ -8,5 +8,9 @@ export default defineConfig({
     ...baseConfig.e2e,
     screenshotOnRunFailure: true,
     video: true,
+    setupNodeEvents(on, config) {
+      require('@cypress/grep/src/plugin')(config);
+      return config;
+    }
   },
 });
