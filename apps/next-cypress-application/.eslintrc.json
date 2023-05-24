@@ -12,7 +12,7 @@
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/next-application-for-e2e/pages"
+          "apps/next-cypress-application/pages"
         ]
       }
     },

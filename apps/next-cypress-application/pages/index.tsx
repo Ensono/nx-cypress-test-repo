@@ -13,7 +13,7 @@ export function Index() {
           <div id="welcome">
             <h1>
               <span> Hello there, </span>
-              Welcome next-application-for-e2e 👋
+              Welcome next-cypress-application 👋
             </h1>
           </div>
 

@@ -1,7 +1,7 @@
 {
-  "name": "next-application-for-e2e",
+  "name": "next-cypress-application",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/next-application-for-e2e",
+  "sourceRoot": "apps/next-cypress-application",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/next-application-for-e2e",
-        "outputPath": "dist/apps/next-application-for-e2e"
+        "root": "apps/next-cypress-application",
+        "outputPath": "dist/apps/next-cypress-application"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/next-application-for-e2e"
+          "outputPath": "apps/next-cypress-application"
         },
         "production": {}
       }
@@ -23,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "next-application-for-e2e:build",
+        "buildTarget": "next-cypress-application:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "next-application-for-e2e:build:development",
+          "buildTarget": "next-cypress-application:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "next-application-for-e2e:build:production",
+          "buildTarget": "next-cypress-application:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "next-application-for-e2e:build:production"
+        "buildTarget": "next-cypress-application:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/next-application-for-e2e/jest.config.ts",
+        "jestConfig": "apps/next-cypress-application/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -56,7 +56,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/next-application-for-e2e/**/*.{ts,tsx,js,jsx}"
+          "apps/next-cypress-application/**/*.{ts,tsx,js,jsx}"
         ]
       }
     }
