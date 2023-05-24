@@ -1,12 +1,20 @@
 {
+  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "env": {
+    "jest": true
+  },
   "extends": [
     "plugin:cypress/recommended",
     "plugin:@nrwl/nx/react-typescript",
     "next",
     "next/core-web-vitals",
-    "../../.eslintrc.json"
+    "../../.eslintrc.json",
+    "plugin:testing-library/react",
+    "plugin:@next/next/recommended"
   ],
-  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -14,7 +22,21 @@
         "@next/next/no-html-link-for-pages": [
           "error",
           "apps/next-cypress-application/pages"
-        ]
+        ],
+        "@typescript-eslint/no-floating-promises": "error",
+        "testing-library/await-async-utils": "error",
+        "testing-library/await-async-query": "error",
+        "testing-library/no-wait-for-side-effects": "error",
+        "testing-library/no-manual-cleanup": "error",
+        "testing-library/prefer-explicit-assert": "warn",
+        "testing-library/prefer-presence-queries": "warn",
+        "testing-library/prefer-wait-for": "error",
+        "testing-library/prefer-user-event": "warn",
+        "testing-library/no-debug": "off"
+      },
+      "excludedFiles": ["jest.config.ts"],
+      "parserOptions": {
+        "project": ["apps/next-cypress-application/tsconfig(.*)?.json"]
       }
     },
     {
@@ -29,11 +51,5 @@
       "files": ["*.cy.{ts,js,tsx,jsx}", "cypress/**/*.{ts,js,tsx,jsx}"],
       "rules": {}
     }
-  ],
-  "rules": {
-    "@next/next/no-html-link-for-pages": "off"
-  },
-  "env": {
-    "jest": true
-  }
+  ]
 }

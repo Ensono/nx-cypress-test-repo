@@ -1,0 +1,20 @@
+# Production values for next-cypress-application.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+fullnameOverride: next-cypress-application
+
+image:
+  repository: amidostacksprodeuwcore.azurecr.io/core/next-cypress-application
+
+ingress:
+  hosts:
+    - host: next-cypress-application.prod.amidostacks.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - prod.amidostacks.com
+
+podAnnotations:
+  instrumentation.opentelemetry.io/inject-nodejs: 'false'

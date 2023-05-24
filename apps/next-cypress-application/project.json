@@ -13,9 +13,7 @@
         "outputPath": "dist/apps/next-cypress-application"
       },
       "configurations": {
-        "development": {
-          "outputPath": "apps/next-cypress-application"
-        },
+        "development": {},
         "production": {}
       }
     },
@@ -49,6 +47,21 @@
       "options": {
         "jestConfig": "apps/next-cypress-application/jest.config.ts",
         "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "collectCoverage": true,
+          "coverageReporters": ["text", "html"],
+          "collectCoverageFrom": [
+            "./**/*.{js,jsx,ts,tsx}",
+            "./!**/.next/**",
+            "./!**/*.d.ts",
+            "./!**/*.config.*",
+            "./!**/_app.*"
+          ],
+          "codeCoverage": true,
+          "ci": true
+        }
       }
     },
     "lint": {
@@ -88,7 +101,208 @@
           "cwd": "apps/next-cypress-application/../../test-results/next-cypress-application/downloads"
         }
       }
+    },
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "options": {
+        "engine": "docker",
+        "load": true,
+        "no-cache": true,
+        "platforms": ["linux/amd64"],
+        "metadata": {
+          "images": ["core/next-cypress-application"],
+          "tags": []
+        }
+      },
+      "configurations": {
+        "nonprod": {
+          "load": false,
+          "push": true,
+          "metadata": {
+            "tags": [
+              "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+              "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
+            ]
+          },
+          "tags": [
+            "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+            "amidostacksnonprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
+          ]
+        },
+        "prod": {
+          "load": false,
+          "push": true,
+          "metadata": {
+            "tags": [
+              "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+              "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
+            ]
+          },
+          "tags": [
+            "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:latest",
+            "amidostacksprodeuwcore.azurecr.io/core/next-cypress-application:${version}"
+          ]
+        }
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional",
+        "allowEmptyRelease": true,
+        "trackDeps": true,
+        "skipCommit": true,
+        "dryRun": true,
+        "skipRootChangelog": true,
+        "skipProjectChangelog": true
+      },
+      "configurations": {
+        "nonprod": {
+          "dryRun": false,
+          "noVerify": true,
+          "push": true,
+          "preid": "nonprod",
+          "releaseAs": "prerelease",
+          "postTargets": [
+            "next-cypress-application:version-env-var",
+            "next-cypress-application:container:nonprod",
+            "next-cypress-application:github"
+          ]
+        },
+        "prod": {
+          "dryRun": false,
+          "noVerify": true,
+          "push": true,
+          "postTargets": [
+            "next-cypress-application:version-env-var",
+            "next-cypress-application:container:prod",
+            "next-cypress-application:github"
+          ]
+        }
+      }
+    },
+    "version-env-var": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "echo APPLICATION_VERSION=${version} > .env.helm-upgrade",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "apps/next-cypress-application"
+      }
+    },
+    "helm-upgrade": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "helm upgrade {args.helm-args} --create-namespace --install {args.values-files} next-cypress-application {args.chart} -n core --atomic --wait --kube-context {args.kube-context} --set image.tag=\"$APPLICATION_VERSION\" --set serviceAccount.annotations.\"azure\\.workload\\.identity/client-id\"=\"{args.clientid}\" --set serviceAccount.annotations.\"azure\\.workload\\.identity/tenant-id\"=\"{args.tenantid}\"",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "apps/next-cypress-application/deploy/helm/nonprod",
+        "args": "--helm-args=--devel --chart=oci://amidostacksnonprodeuwcore.azurecr.io/helm/next-helm-chart --kube-context=amido-stacks-nonprod-euw-core-admin --values-files='--values values.yaml'"
+      },
+      "configurations": {
+        "prod": {
+          "cwd": "apps/next-cypress-application/deploy/helm/prod",
+          "args": "--helm-args='' --chart=oci://amidostacksprodeuwcore.azurecr.io/helm/next-helm-chart --kube-context=amido-stacks-prod-euw-core-admin --values-files='--values values.yaml'"
+        }
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}"
+      }
+    },
+    "terraform-fmt": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "terraform fmt -check -diff",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "apps/next-cypress-application/deploy/terraform",
+        "parallel": false
+      }
+    },
+    "terraform-init": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "terraform init -lock-timeout=60s -input=false -backend-config=\"resource_group_name={args.rg}\" -backend-config=\"storage_account_name={args.sa}\" -backend-config=\"container_name={args.container}\" -backend-config=\"key={args.key}\"",
+            "forwardAllArgs": false
+          }
+        ],
+        "args": "--rg=Stacks-Ancillary-Resources --sa=amidostackstfstate --container=tfstate --key=next-cypress-application:nonprod",
+        "cwd": "apps/next-cypress-application/deploy/terraform",
+        "parallel": false
+      },
+      "configurations": {
+        "prod": {
+          "args": "--rg=Stacks-Ancillary-Resources --sa=amidostackstfstate --container=tfstate --key=next-cypress-application:prod"
+        }
+      }
+    },
+    "terraform-validate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "terraform validate",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "apps/next-cypress-application/deploy/terraform",
+        "parallel": false
+      }
+    },
+    "terraform-plan": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "terraform validate",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "terraform plan -input=false -lock-timeout=60s {args.terraform} -out=next-cypress-application.tfplan",
+            "forwardAllArgs": false
+          }
+        ],
+        "args": "--terraform='-var-file=variables/nonprod/dns.tfvars'",
+        "cwd": "apps/next-cypress-application/deploy/terraform",
+        "parallel": false
+      },
+      "configurations": {
+        "prod": {
+          "args": "--terraform='-var-file=variables/prod/dns.tfvars'"
+        }
+      }
+    },
+    "terraform-apply": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "terraform apply -auto-approve -input=false next-cypress-application.tfplan",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "apps/next-cypress-application/deploy/terraform"
+      },
+      "configurations": {
+        "prod": {}
+      }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["next-helm-chart"]
 }
