@@ -44,8 +44,8 @@ stages:
                 chmod +x /usr/local/bin/envfile
           - script: |
               npm ci
-              git config --global user.email "pipelines@prod.amidostacks.com"
-              git config --global user.name "amido Pipelines"
+              git config --global user.email "pipelines@test.dev"
+              git config --global user.name "Amido Pipelines"
           - task: AzureCLI@2
             displayName: build_deployment_${{ parameters.environment }}
             env:
