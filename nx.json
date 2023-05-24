@@ -3,19 +3,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e",
-          "container",
-          "helm-package",
-          "terraform-fmt",
-          "terraform-init",
-          "terraform-validate",
-          "terraform-plan",
-          "terraform-apply"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
@@ -30,43 +18,7 @@
       ]
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "helm"]
-    },
-    "version": {
-      "dependsOn": ["build"]
-    },
-    "container": {
-      "dependsOn": ["build"],
-      "inputs": ["container"]
-    },
-    "helm-package": {
-      "inputs": ["helm"],
-      "outputs": ["{workspaceRoot}/libs/next-helm-chart/dist/*.tgz"]
-    },
-    "helm-push": {
-      "dependsOn": ["helm-package"],
-      "inputs": ["helm"]
-    },
-    "terraform-fmt": {
-      "inputs": ["terraform"]
-    },
-    "terraform-init": {
-      "inputs": ["terraform"],
-      "outputs": [
-        "{projectRoot}/deploy/terraform/.terraform",
-        "{projectRoot}/deploy/terraform/.terraform.lock.hcl"
-      ]
-    },
-    "terraform-validate": {
-      "dependsOn": ["terraform-init"],
-      "inputs": ["terraform"]
-    },
-    "terraform-plan": {
-      "inputs": ["terraform"],
-      "outputs": ["{projectRoot}/deploy/terraform/*.tfplan"]
-    },
-    "terraform-apply": {
-      "inputs": ["terraform"]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     }
   },
   "affected": {
@@ -114,33 +66,13 @@
       },
       "vcs": {
         "type": "github",
-        "url": "https://github.com/amido/nx-cypress-test-repo.git"
+        "url": "https://github.com/amido/cycle-11-multi-app-test.git"
       }
     },
     "executedGenerators": {
-      "project": {
-        "next-application-for-cypress": [
-          "CypressInit",
-          "NextInit",
-          "NextInitDeployment"
-        ]
-      },
-      "workspace": [
-        "WorkspaceInit",
-        "WorkspaceDeployment",
-        "PlaywrightInitDeployment"
-      ]
+      "project": {},
+      "workspace": ["WorkspaceInit", "WorkspaceDeployment"]
     }
   },
-  "extends": "nx/presets/npm.json",
-  "namedInputs": {
-    "default": ["!{projectRoot}/Dockerfile"],
-    "container": ["{projectRoot}/Dockerfile"],
-    "helm": ["{workspaceRoot}/libs/next-helm-chart/build/helm/**/*"],
-    "terraform": [
-      "{projectRoot}/deploy/terraform/*.tf",
-      "{projectRoot}/deploy/terraform/*.tfvars",
-      "{projectRoot}/deploy/terraform/.terraform.lock.hcl"
-    ]
-  }
+  "extends": "nx/presets/npm.json"
 }
