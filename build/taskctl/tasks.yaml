@@ -75,11 +75,11 @@ tasks:
         --target=terraform-plan  --configuration=prod
       - npx nx affected --base="$BASE_SHA" --target=terraform-apply
         --configuration=prod
-  e2e:local:
-    description: Run e2e tests locally
-    command:
-      - npx nx affected --base="$BASE_SHA" --target=e2e-docker --parallel=1
   e2e:ci:
     description: Run e2e tests in ci
     command:
       - npx nx affected --base="$BASE_SHA" --target=e2e --parallel=1
+  html:
+    description: Generate html reports for tests
+    command:
+      - npx nx affected --base="$BASE_SHA" --target=html-report --parallel=1

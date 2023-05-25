@@ -4,7 +4,7 @@ FROM docker.io/node:lts-alpine as deps
 # to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat python3 make gcc g++
 WORKDIR /usr/src/app
-COPY dist/apps/next-application-for-cypress/package*.json ./
+COPY dist/apps/next-cypress-application/package*.json ./
 RUN npm install --omit=dev
 
 # Production image, copy all the files and run next
@@ -16,10 +16,10 @@ ENV PORT 4200
 WORKDIR /usr/src/app
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=deps /usr/src/app/package.json ./package.json
-COPY dist/apps/next-application-for-cypress/next.config.js ./next.config.js
-COPY dist/apps/next-application-for-cypress/public ./public
+COPY dist/apps/next-cypress-application/next.config.js ./next.config.js
+COPY dist/apps/next-cypress-application/public ./public
 
-COPY dist/apps/next-application-for-cypress/.next ./.next
+COPY dist/apps/next-cypress-application/.next ./.next
 RUN chown -R node:node .
 USER node
 EXPOSE 4200
