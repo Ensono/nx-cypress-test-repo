@@ -1,7 +1,7 @@
 parameters:
   - name: azureSubscription
     type: string
-    default: 'amido.stacks (719637e5-aedd-4fb1-b231-5101b45f8bb5)'
+    default: amido.stacks (719637e5-aedd-4fb1-b231-5101b45f8bb5)
   - name: containerRegistry
     type: string
     default: amidostacksnonprodeuwcore.azurecr.io
@@ -42,7 +42,7 @@ stages:
                 -O /usr/local/bin/envfile
 
                 chmod +x /usr/local/bin/envfile
-          - script: |-
+          - script: |
               npm ci
               git config --global user.email "pipelines@test.dev"
               git config --global user.name "Amido Pipelines"

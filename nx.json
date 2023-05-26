@@ -114,12 +114,12 @@
       },
       "vcs": {
         "type": "github",
-        "url": "https://github.com/amido/nx-cypress-test-repo.git"
+        "url": "https://github.com/amido/cycle-11-multi-app-test.git"
       }
     },
     "executedGenerators": {
       "project": {
-        "next-application-for-cypress": [
+        "next-cypress-application": [
           "CypressInit",
           "NextInit",
           "NextInitDeployment"
@@ -128,7 +128,7 @@
       "workspace": [
         "WorkspaceInit",
         "WorkspaceDeployment",
-        "PlaywrightInitDeployment"
+        "CypressInitDeployment"
       ]
     }
   },

@@ -21,7 +21,7 @@
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/next-application-for-cypress/pages"
+          "apps/next-cypress-application/pages"
         ],
         "@typescript-eslint/no-floating-promises": "error",
         "testing-library/await-async-utils": "error",
@@ -36,7 +36,7 @@
       },
       "excludedFiles": ["jest.config.ts"],
       "parserOptions": {
-        "project": ["apps/next-application-for-cypress/tsconfig(.*)?.json"]
+        "project": ["apps/next-cypress-application/tsconfig(.*)?.json"]
       }
     },
     {

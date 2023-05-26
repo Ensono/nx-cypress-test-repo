@@ -6,7 +6,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to next-application-for-cypress!</title>
+        <title>Welcome to next-cypress-application!</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />
