@@ -36,12 +36,12 @@ pipelines:
       depends_on: test:ci
     - task: html
       depends_on: e2e:ci
-    - task: version:nonprod
-      depends_on: e2e:ci
-    - task: terraform:nonprod
-      depends_on: version:nonprod
-    - task: helm:nonprod
-      depends_on: terraform:nonprod
+    # - task: version:nonprod
+    #   depends_on: e2e:ci
+    # - task: terraform:nonprod
+    #   depends_on: version:nonprod
+    # - task: helm:nonprod
+    #   depends_on: terraform:nonprod
   prod:
     - task: build:ci
     - task: test:ci
@@ -50,9 +50,9 @@ pipelines:
       depends_on: test:ci
     - task: html
       depends_on: e2e:ci
-    - task: version:prod
-      depends_on: e2e:ci
-    - task: terraform:prod
-      depends_on: version:prod
-    - task: helm:prod
-      depends_on: terraform:prod
+    # - task: version:prod
+    #   depends_on: e2e:ci
+    # - task: terraform:prod
+    #   depends_on: version:prod
+    # - task: helm:prod
+    #   depends_on: terraform:prod
